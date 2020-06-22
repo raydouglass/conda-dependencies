@@ -98,15 +98,15 @@ def main():
                         const=True)
     parser.add_argument('-g', '--graph', action='append', type=str,
                         dest='graph', metavar='ENGINE',
-                        default=[],
-                        help='Which graphviz engines to use (dot, fdp, circo, twopi, etc')
+                        default=['dot'],
+                        help='Which graphviz engines to use (dot, fdp, circo, twopi, etc). Defaults to dot')
     parser.add_argument('package')
     parser.add_argument('version')
     parser.add_argument('output')
 
     ns = parser.parse_args()
     dependencies, graph = get_dependencies(ns.package, ns.version, ns.channels,
-                                           ns.ignore, ns.hightlight, ns.verbose)
+                                           ns.ignore, ns.highlight, ns.verbose)
     for key, val in dependencies.items():
         print(f'{key} => {val}')
     graph.format = 'png'
