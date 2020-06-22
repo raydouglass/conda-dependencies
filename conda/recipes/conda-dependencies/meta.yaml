@@ -1,4 +1,5 @@
 {% set version = environ.get('GIT_DESCRIBE_TAG', '0.0.0.dev0').lstrip('v') %}
+{% set number = environ.get('GIT_DESCRIBE_NUMBER', 0) %}
 
 package:
   name: conda-dependencies
@@ -8,7 +9,7 @@ source:
   git_url: ../../..
 
 build:
-  number: {{ GIT_DESCRIBE_NUMBER }}
+  number: {{ number }}
   script: python -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
   noarch: python
 
@@ -19,11 +20,15 @@ requirements:
   run:
     - python >=3.6
     - graphviz
+    - python-graphviz
+    - conda
 
 
 test:
   imports:
     - conda_dependencies
+  commands:
+    - conda-dependencies -h
 
 about:
   home: https://github.com/raydouglass/conda-dependencies
