@@ -4,6 +4,10 @@ This is a tool to help vizualize conda dependencies without having to create a c
 
 The results of this tool are not always 100% accurate since there is no full conda solve, but the results are useful in some cases such as when the conda solver has conflicts.
 
+## Install
+
+`conda install -c raydouglass conda-dependencies`
+
 ## Usage
 
 ```
