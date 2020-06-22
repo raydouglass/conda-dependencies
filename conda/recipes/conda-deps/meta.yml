@@ -1,0 +1,32 @@
+{% set version = environ.get('GIT_DESCRIBE_TAG', '0.0.0.dev0').lstrip('v') %}
+
+package:
+  name: conda-dependencies
+  version: {{ version }}
+
+source:
+  git_url: ../../..
+
+build:
+  number: {{ GIT_DESCRIBE_NUMBER }}
+  script: python -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
+  noarch: python
+
+requirements:
+  build:
+    - python >=3.6
+    - setuptools
+  run:
+    - python >=3.6
+    - graphviz
+
+
+test:
+  imports:
+    - conda_dependencies
+
+about:
+  home: https://github.com/raydouglass/conda-dependencies
+  license: Apache
+  summary: 'Tool to visualize conda dependencies'
+  dev_url: https://github.com/raydouglass/conda-dependencies
